@@ -1,0 +1,39 @@
+#!/bin/sh
+# autopkgtest: the installed binary must work and must still detect a broken tree.
+set -eu
+
+lintwright --version
+lintwright rules | grep -q control-missing
+
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+mkdir -p "$tmpdir/debian/source"
+
+cat > "$tmpdir/debian/control" <<'EOF'
+Source: broken
+Section: devel
+Priority: optional
+Maintainer: Not An Email
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.0
+
+Package: broken
+Architecture: all
+Description: broken test package
+ A body so the description rule does not fire.
+EOF
+
+cat > "$tmpdir/debian/changelog" <<'EOF'
+broken (1.0-1) UNRELEASED; urgency=medium
+
+  * Test entry.
+
+ -- Not An Email <broken@example.com>  Mon, 05 Oct 2026 10:00:00 +0000
+EOF
+
+printf '3.0 (quilt)\n' > "$tmpdir/debian/source/format"
+printf '#!/usr/bin/make -f\n%%:\n\tdh $@\n' > "$tmpdir/debian/rules"
+chmod +x "$tmpdir/debian/rules"
+
+lintwright check "$tmpdir" || status=$?
+test "${status:-0}" -eq 1

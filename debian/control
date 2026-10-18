@@ -1,0 +1,21 @@
+Source: lintwright
+Section: devel
+Priority: optional
+Maintainer: Aditya <aditya16011664@gmail.com>
+Build-Depends: debhelper-compat (= 13), dh-python, pybuild-plugin-pyproject,
+ python3-all, python3-setuptools
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+Homepage: https://github.com/placeholder/lintwright
+
+Package: lintwright
+Architecture: all
+Depends: ${python3:Depends}, ${misc:Depends}
+Description: static analysis for Debian source packages
+ lintwright checks a Debian source tree for the policy details that break
+ archive uploads and slow down review: malformed changelog trailers, missing
+ source formats, obsolete debhelper compat levels, install paths under
+ /usr/local, and maintainer scripts without set -e.
+ .
+ It runs offline, has no third-party dependencies, and emits both
+ human-readable and JSON output so it can gate a CI pipeline.

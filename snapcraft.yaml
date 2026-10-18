@@ -1,0 +1,39 @@
+name: lintwright
+base: core24
+version: "0.3.0"
+summary: Static analysis for Debian source packages
+description: |
+  lintwright checks a Debian source tree for the policy details that break
+  archive uploads: malformed changelog trailers, missing source formats,
+  obsolete debhelper compat levels, install paths under /usr/local, and
+  maintainer scripts without set -e.
+
+  It runs offline and reports findings as file:line with a stable tag.
+grade: stable
+confinement: strict
+license: MIT
+contact: aditya16011664@gmail.com
+source-code: https://github.com/placeholder/lintwright
+issues: https://github.com/placeholder/lintwright/issues
+
+apps:
+  lintwright:
+    command: bin/lintwright
+    plugs:
+      - home
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.12/site-packages
+
+parts:
+  lintwright:
+    plugin: python
+    source: .
+    build-packages:
+      - python3-dev
+    stage-packages:
+      - python3-minimal
+    python-requirements: []
+    override-build: |
+      craftctl default
+      install -D -m 0644 debian/lintwright.1 \
+        "$CRAFT_PART_INSTALL/usr/share/man/man1/lintwright.1"

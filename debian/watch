@@ -1,0 +1,2 @@
+version=4
+https://github.com/placeholder/lintwright/tags .*/v?@ANY_VERSION@\.tar\.gz

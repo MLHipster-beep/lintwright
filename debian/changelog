@@ -1,0 +1,8 @@
+lintwright (0.3.0-1) noble; urgency=medium
+
+  * Initial release.
+  * 26 policy rules covering control, rules, changelog, copyright and
+    install layout.
+  * JSON output and tag filtering for CI use.
+
+ -- Aditya <aditya16011664@gmail.com>  Sun, 18 Oct 2026 12:00:00 +0545

@@ -1,0 +1,10 @@
+Source: demo
+Section: devel
+Priority: optional
+Maintainer: demo@example.com
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.0
+
+Package: demo
+Architecture: all
+Description: a package whose synopsis line is deliberately long enough to trip the eighty character rule

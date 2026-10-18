@@ -1,0 +1,3 @@
+# First upload: there is no WNPP bug to close yet. Remove this override once
+# the package has an ITP to reference in debian/changelog.
+initial-upload-closes-no-bugs

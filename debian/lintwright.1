@@ -1,0 +1,97 @@
+.TH LINTWRIGHT 1 "2026-10-18" "lintwright 0.3.0" "User Commands"
+.SH NAME
+lintwright \- static analysis for Debian source packages
+.SH SYNOPSIS
+.B lintwright
+.I command
+.RI [ options ]
+.SH DESCRIPTION
+.B lintwright
+reads a Debian source tree and reports the policy details that break archive
+uploads and slow down review: changelog trailers, source formats, debhelper
+compatibility levels, install paths and maintainer scripts.
+.PP
+It never executes package code and never contacts the network.  Every finding
+carries a file, a line number and a stable tag, so a pipeline can suppress a
+single rule without suppressing a file.
+.SH COMMANDS
+.TP
+.B check \fIpath\fR
+Analyse the source tree rooted at \fIpath\fR (default: the current directory).
+.TP
+.B rules
+List every rule with its default severity and a one-line summary.
+.SH OPTIONS
+.TP
+.B \-\-format text|json
+Output format.  JSON is stable and intended for CI consumption.
+.TP
+.B \-\-fail\-on error|warning|info|never
+Lowest severity that produces exit status 1.  Default: \fBerror\fR.
+.TP
+.B \-\-only \fITAG\fR
+Run only this tag.  May be repeated.
+.TP
+.B \-\-skip \fITAG\fR
+Never run this tag.  May be repeated.
+.TP
+.B \-\-statistics
+Print a per-tag count table to standard error.
+.TP
+.B \-\-no\-color
+Disable colour even when standard output is a terminal.
+.SH EXIT STATUS
+.TP
+.B 0
+No findings at or above the \fB\-\-fail\-on\fR threshold.
+.TP
+.B 1
+At least one finding at or above the threshold.
+.TP
+.B 2
+Usage error: bad path, unknown tag, unknown option.
+.SH EXAMPLES
+Check a tree and fail the build on warnings:
+.PP
+.nf
+.RS
+lintwright check . \-\-fail\-on warning
+.RE
+.fi
+.PP
+Produce JSON for a CI annotation step:
+.PP
+.nf
+.RS
+lintwright check . \-\-format json > lintwright.json
+.RE
+.fi
+.PP
+Ignore one rule while bringing a legacy package up to date:
+.PP
+.nf
+.RS
+lintwright check . \-\-skip watch\-missing
+.RE
+.fi
+.SH FILES
+.TP
+.I debian/control
+Source and binary package metadata.
+.TP
+.I debian/changelog
+Most recent entry, validated for header, urgency, signature and date.
+.TP
+.I debian/rules
+Build entry point; checked for shebang and executability.
+.TP
+.I debian/source/format
+Source package format.
+.SH SEE ALSO
+.BR lintian (1),
+.BR dpkg\-buildpackage (1),
+.BR debhelper (7)
+.PP
+Debian Policy Manual, https://www.debian.org/doc/debian-policy/
+.SH AUTHOR
+Aditya <aditya16011664@gmail.com>
