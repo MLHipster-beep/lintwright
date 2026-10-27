@@ -39,7 +39,7 @@ a pipeline can suppress exactly one rule.
 From source (no dependencies beyond Python 3.10+):
 
 ```bash
-git clone https://github.com/placeholder/lintwright
+git clone https://github.com/MLHipster-beep/lintwright
 cd lintwright
 python3 -m pip install .
 lintwright --version

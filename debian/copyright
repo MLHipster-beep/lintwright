@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: lintwright
-Source: https://github.com/placeholder/lintwright
+Source: https://github.com/MLHipster-beep/lintwright
 
 Files: *
 Copyright: 2026 Aditya <aditya16011664@gmail.com>

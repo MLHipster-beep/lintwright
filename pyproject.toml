@@ -26,7 +26,7 @@ dependencies = []
 lintwright = "lintwright.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/placeholder/lintwright"
+Homepage = "https://github.com/MLHipster-beep/lintwright"
 
 [tool.setuptools.packages.find]
 where = ["src"]

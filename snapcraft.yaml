@@ -13,8 +13,8 @@ grade: stable
 confinement: strict
 license: MIT
 contact: aditya16011664@gmail.com
-source-code: https://github.com/placeholder/lintwright
-issues: https://github.com/placeholder/lintwright/issues
+source-code: https://github.com/MLHipster-beep/lintwright
+issues: https://github.com/MLHipster-beep/lintwright/issues
 
 apps:
   lintwright:
