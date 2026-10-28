@@ -45,7 +45,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            build-essential debhelper dh-python python3-all python3-setuptools lintian
+            build-essential debhelper dh-python pybuild-plugin-pyproject \
+            python3-all python3-setuptools lintian
       - name: Build
         run: dpkg-buildpackage -us -uc -b
       - name: lintian
