@@ -51,9 +51,17 @@ jobs:
         run: dpkg-buildpackage -us -uc -b
       - name: lintian
         run: lintian --fail-on error ../lintwright_*.changes
-      - uses: actions/upload-artifact@v4
+      - name: Stage Debian package for upload
+        run: |
+          mkdir -p artifacts
+          cp ../lintwright_*.deb ../lintwright_*.changes artifacts/
+          ls -lh artifacts/
+
+      - name: Upload Debian package
+        uses: actions/upload-artifact@v4
         with:
-          name: deb
+          name: lintwright-deb
           path: |
-            ../lintwright_*.deb
-            ../lintwright_*.changes
+            artifacts/lintwright_*.deb
+            artifacts/lintwright_*.changes
+          if-no-files-found: error
